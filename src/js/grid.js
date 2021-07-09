@@ -38,8 +38,8 @@ class Grid {
     movePlayer(td) {
         console.log("movePlayer", td);
         //1. récupérer (x,y) de la case td
-        const x = td.dataset.x;
-        const y = td.dataset.y;
+        const x = parseInt(td.dataset.x);
+        const y = parseInt(td.dataset.y);
         console.log(x,y);
         //2. attribuer les nouvelles coordonnées au player actif
         this.players[this.activePlayerIndex].x = x;
@@ -218,8 +218,8 @@ class Grid {
     }
 
     getMovableCells() {
-        const x = this.players[this.activePlayerIndex].x;
-        const y = this.players[this.activePlayerIndex].y;
+        const x = parseInt(this.players[this.activePlayerIndex].x);
+        const y = parseInt(this.players[this.activePlayerIndex].y);
         const cells = [];
         // déplacement à droite
         for (let i = x+1; i < x+4; i++) {
