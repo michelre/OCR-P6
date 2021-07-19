@@ -29,7 +29,7 @@ function () {
       var _this = this;
 
       var table = "<table>";
-      var gameGrid = document.querySelector('.game-grid');
+      var gameGrid = document.querySelector('.game-grid'); // console.log("game-grid" + gameGrid);
 
       for (var i = 0; i < this.nbLines; i++) {
         var line = "<tr>";
@@ -57,21 +57,48 @@ function () {
       });
     }
   }, {
+    key: "displayPlayersInfo",
+    value: function displayPlayersInfo() {
+      var playerName = "";
+      var playerNameDisplay = document.getElementsByClassName('info-wrapper__title');
+
+      for (var j = 0; j < this.players.length; j++) {
+        var infoPlayerId = "<div id=\"playerNameId" + j + "\">" + this.players[j].name + "</div>";
+        console.log("j =  " + j);
+        console.log("this.players[j].name =  " + this.players[j].name);
+        console.log("infoPlayerId " + infoPlayerId);
+        infoPlayerId++;
+      }
+
+      playerNameDisplay.innerHTML = this.infoPlayerId;
+      console.log("playerNameDisplay = " + playerNameDisplay); // for(let i = 0; i < this.players.length; i++) {
+      //     let playerName = this.players[i].name;
+      //     console.log("salut " + playerName);
+      //     playerName ++;
+      //     console.log("bonsoir " + this.players[i].name);
+      //     }
+      // const playerName1 = document.getElementById('playerName1');
+      // playerName1.innerHTML =this.players[0].name;
+      // const playerName2 = document.getElementById('playerName2');
+      // playerName2.innerHTML =  this.players[1].name;
+    }
+  }, {
     key: "movePlayer",
     value: function movePlayer(td) {
       console.log("movePlayer", td); //1. récupérer (x,y) de la case td
 
-      var x = td.dataset.x;
-      var y = td.dataset.y;
-      console.log(x, y); //2. attribuer les nouvelles coordonnées au player actif
+      var x = parseInt(td.dataset.x);
+      var y = parseInt(td.dataset.y);
+      this.takeWeapon(x, y); //2. attribuer les nouvelles coordonnées au player actif
 
       this.players[this.activePlayerIndex].x = x;
       this.players[this.activePlayerIndex].y = y; //3. déplacer (changer) l'image de place => attribuer à l'image les nouvelles coordonnées
+      //4. changer "activePlayer" => getMovableCells & drawMovableCells
 
       this.renderGrid();
       this.changeActivePlayerIndex();
       var cells = this.getMovableCells();
-      this.drawMovableCells(cells); //4. changer "activePlayer" => getMovableCells & drawMovableCells
+      this.drawMovableCells(cells);
     }
   }, {
     key: "renderGrid",
@@ -133,6 +160,17 @@ function () {
       return true;
     }
   }, {
+    key: "isCellWeapon",
+    value: function isCellWeapon(x, y) {
+      for (var i = 0; i < this.weapons.length; i++) {
+        if (this.weapons[i].x == x && this.weapons[i].y == y) {
+          return this.weapons[i];
+        }
+      }
+
+      return null;
+    }
+  }, {
     key: "isPlayerCollapsed",
     value: function isPlayerCollapsed(x, y) {
       for (var i = 0; i < this.players.length; i++) {
@@ -155,6 +193,10 @@ function () {
 
       return false;
     }
+    /*************************
+    * Obstacles
+    *************************/
+
   }, {
     key: "createObstacles",
     value: function createObstacles() {
@@ -183,6 +225,10 @@ function () {
         cell.classList.add("obstacle");
       }
     }
+    /*************************
+    * Weapons
+    *************************/
+
   }, {
     key: "createWeapons",
     value: function createWeapons() {
@@ -193,20 +239,27 @@ function () {
         var y = Math.floor(Math.random() * this.nbColumns);
 
         if (this.isEmptyCellWeapon(x, y)) {
-          this.weapons.push({
-            x: x,
-            y: y
-          });
+          this.weapons.push(new Weapon(x, y, 0));
           l++;
         }
       }
 
-      this.weapons[0]['name'] = 'Épée de légende';
-      this.weapons[1]['name'] = 'Lance de soldat';
-      this.weapons[2]['name'] = 'Hache de maître';
-      this.weapons[3]['name'] = 'Grand bommerang';
-      this.weapons[4]['name'] = 'Arc royal';
+      this.weapons[0].name = 'Épée de légende';
+      this.weapons[1].name = 'Lance de soldat';
+      this.weapons[2].name = 'Hache de maître';
+      this.weapons[3].name = 'Grand bommerang';
+      this.weapons[4].name = 'Arc royal';
       console.log(this.weapons);
+    }
+  }, {
+    key: "takeWeapon",
+    value: function takeWeapon(x, y) {
+      var w = this.players[this.activePlayerIndex].weapon;
+      var wCell = this.isCellWeapon(x, y);
+
+      if (wCell) {
+        this.players[this.activePlayerIndex].weapon = wCell;
+      }
     }
   }, {
     key: "drawWeapons",
@@ -218,6 +271,16 @@ function () {
       }
     }
   }, {
+    key: "displayWeaponsInfo",
+    value: function displayWeaponsInfo() {
+      var contentItemWeapons = document.getElementById('weapons');
+      contentItemWeapons.innerHTML = "<aside class=\"info-wrapper\">\n            <div class=\"info-wrapper__title\">armes</div>\n            <div class=\"info-wrapper__item-description\">\n                <div class=\"info-wrapper__item-description__img\">   \n                    <img src=\"../img/epee-de-legende.png\">\n                </div>\n                <div class=\"info-wrapper__item-description__body\">\n                    <div id=\"weapon__name\">nom</div>\n                    <div id=\"weapon__damages\">d\xE9gats</div>\n                </div>\n        </aside>";
+    }
+    /*************************
+    * Players
+    *************************/
+
+  }, {
     key: "createPlayers",
     value: function createPlayers() {
       var m = 0;
@@ -227,18 +290,23 @@ function () {
         var y = Math.floor(Math.random() * this.nbColumns);
 
         if (this.isEmptyCellPlayer(x, y) && !this.isPlayerCollapsed(x, y)) {
-          this.players.push({
-            x: x,
-            y: y
-          });
+          this.players.push(new Player(x, y));
           m++;
         }
       }
 
-      this.players[0]['name'] = 'player1';
-      this.players[1]['name'] = 'player2';
+      this.players[0].name = 'player1';
+      this.players[1].name = 'player2';
       console.log(this.players);
-    }
+    } // displayPlayersInfo() {
+    //     for(let i = 0; i < this.players.length; i++) {
+    //         console.log(i);
+    //         const contentItemPlayers = document.getElementById('player1');
+    //         let playerName = "";
+    //         contentItemPlayers.innerHTML = playerName;
+    //     }
+    // }
+
   }, {
     key: "drawPlayers",
     value: function drawPlayers() {
@@ -261,13 +329,16 @@ function () {
     key: "isActivePlayer",
     value: function isActivePlayer() {
       if (this.activePlayerIndex == 0) this.players = 'player1';else this.players = 'player2';
-      console.log(this.players);
     }
+    /*************************
+    * Cells
+    *************************/
+
   }, {
     key: "getMovableCells",
     value: function getMovableCells() {
-      var x = this.players[this.activePlayerIndex].x;
-      var y = this.players[this.activePlayerIndex].y;
+      var x = parseInt(this.players[this.activePlayerIndex].x);
+      var y = parseInt(this.players[this.activePlayerIndex].y);
       var cells = []; // déplacement à droite
 
       for (var i = x + 1; i < x + 4; i++) {

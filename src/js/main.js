@@ -3,11 +3,14 @@ grid.createGrid();
 grid.createObstacles();
 grid.createWeapons();
 grid.createPlayers();
+grid.displayPlayersInfo();
 grid.drawObstacles();
 grid.drawPlayers();
 grid.drawWeapons();
+grid.displayWeaponsInfo();
 const cells = grid.getMovableCells();
 grid.drawMovableCells(cells);
+
 
 
 // Swal.fire({

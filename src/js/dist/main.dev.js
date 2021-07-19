@@ -5,9 +5,11 @@ grid.createGrid();
 grid.createObstacles();
 grid.createWeapons();
 grid.createPlayers();
+grid.displayPlayersInfo();
 grid.drawObstacles();
 grid.drawPlayers();
 grid.drawWeapons();
+grid.displayWeaponsInfo();
 var cells = grid.getMovableCells();
 grid.drawMovableCells(cells); // Swal.fire({
 //     title: '<strong>Bienvenue</strong>',
