@@ -9,6 +9,6 @@ var Player = function Player(x, y) {
   this.y = y;
   this.life = 100;
   this.weapon = new Weapon(-1, -1, 0);
-  this.weapon.name = "couteau";
+  this.weapon.name = "lance";
   this.name = "";
 }; // console.log('players-hello');

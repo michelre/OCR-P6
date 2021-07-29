@@ -9,6 +9,7 @@ grid.displayPlayersInfo();
 grid.drawObstacles();
 grid.drawPlayers();
 grid.drawWeapons();
+grid.takeWeapon();
 grid.displayWeaponsInfo();
 var cells = grid.getMovableCells();
 grid.drawMovableCells(cells); // Swal.fire({

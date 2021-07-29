@@ -1,14 +1,11 @@
+@font-face {
+  font-family: Zelda;
+  src: url("../font/Triforce.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
-}
-
-body {
-  position: relative;
-  background: url(../img/bilde-test-1.jpg) no-repeat center;
-  background-size: cover;
-  height: 100vh;
-  overflow: hidden;
 }
 
 .main {
@@ -23,6 +20,12 @@ body {
           justify-content: center;
   min-height: 100%;
   min-width: 100%;
+  position: relative;
+  background: url(../img/bilde-test-1.jpg) no-repeat center;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Zelda;
 }
 
 .content {
@@ -39,9 +42,12 @@ body {
   min-width: 100%;
 }
 
-.content__item:nth-child(1),
+.content__item:nth-child(1) {
+  width: 10%;
+}
+
 .content__item:last-child {
-  width: 15%;
+  width: 20%;
 }
 
 .content__item:nth-child(2) {
@@ -74,14 +80,14 @@ body {
 
 table {
   border-collapse: collapse;
-  border: 4px solid #EEC79B;
-  background-color: #17651787;
+  border: 4px solid #c0a26c;
+  background-color: #57835721;
 }
 
 td {
   height: 70px;
   width: 70px;
-  border: 2px solid #EEC79B;
+  border: 2px solid #3fb13e;
 }
 
 .obstacle {
@@ -93,13 +99,13 @@ td {
   height: 71px;
 }
 
-.player1 {
+.Link {
   background-size: contain !important;
   background: url("../img/link.png") no-repeat center;
 }
 
-.player2 {
-  background: url("../img/Ganondorf2.png") no-repeat center;
+.Ganondorf {
+  background: url("../img/Ganondorf.png") no-repeat center;
   background-size: contain;
 }
 
@@ -150,24 +156,25 @@ Informations cards
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding: 15%;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border: 1px solid antiquewhite;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #46560d;
   border-radius: 5px;
-  margin: 15%;
-  padding: 15%;
+  margin: 10%;
+  padding: 10%;
+  color: #46560d;
+  background-color: #c0a26c;
 }
 
 .info-wrapper__title {
   text-transform: uppercase;
-  border-bottom: 1px solid antiquewhite;
+  color: #ca0109;
 }
 
 .info-wrapper__item-description {
@@ -181,28 +188,49 @@ Informations cards
   -ms-flex-pack: center;
   justify-content: center;
   padding: 1rem 0;
-  border-bottom: 1px solid antiquewhite;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .info-wrapper__item-description__img {
   background-size: contain !important;
-  background: url("../img/epee-de-legende.png") no-repeat center;
-  height: 100%;
-  width: 40%;
+  margin-bottom: 1rem;
 }
 
 .info-wrapper__item-description__body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 60%;
-  margin-left: 1rem;
+}
+
+#player__weapon,
+#player__life {
+  text-transform: uppercase;
+  color: #ca0109;
+}
+
+#player__weapon {
+  margin-bottom: 1rem;
+}
+
+.content__item-weapons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 /*# sourceMappingURL=style.css.map */
