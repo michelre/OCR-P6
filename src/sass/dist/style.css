@@ -33,18 +33,6 @@
   min-width: 100%;
 }
 
-.content__item:nth-child(1) {
-  width: 10%;
-}
-
-.content__item:last-child {
-  width: 20%;
-}
-
-.content__item:nth-child(2) {
-  width: auto;
-}
-
 .game-details {
   display: flex;
   align-items: center;
@@ -69,6 +57,10 @@ td {
   border: 2px solid #3fb13e;
 }
 
+.movable {
+  background: #ec0a0a69;
+}
+
 .obstacle {
   background: url("../img/block.png");
 }
@@ -76,6 +68,35 @@ td {
 .players {
   width: 71px;
   height: 71px;
+}
+
+.weapon0 {
+  background: url("../img/arc-royal.jpg") no-repeat center;
+  background-size: contain;
+}
+
+.weapon1 {
+  background: url("../img/epee-de-legende.jpg") no-repeat center;
+  background-size: contain;
+}
+
+.weapon2 {
+  background: url("../img/epee-des-flammes.jpg") no-repeat center;
+  background-size: contain;
+}
+
+.weapon3 {
+  background: url("../img/hache-de-maitre.jpg") no-repeat center;
+  background-size: contain;
+}
+
+.weapon4 {
+  background: url("../img/longue-epee-electrique.jpg") no-repeat center;
+  background-size: contain;
+}
+
+td[class^=weapon] {
+  z-index: 999;
 }
 
 .Link {
@@ -88,31 +109,6 @@ td {
   background-size: contain;
 }
 
-.weapon0 {
-  background: url("../img/arc-royal.png") no-repeat center;
-  background-size: contain;
-}
-
-.weapon1 {
-  background: url("../img/epee-de-legende.png") no-repeat center;
-  background-size: contain;
-}
-
-.weapon2 {
-  background: url("../img/epee-des-flammes.png") no-repeat center;
-  background-size: contain;
-}
-
-.weapon3 {
-  background: url("../img/hache-de-maitre.png") no-repeat center;
-  background-size: contain;
-}
-
-.weapon4 {
-  background: url("../img/longue-epee-electrique.png") no-repeat center;
-  background-size: contain;
-}
-
 .swal2-container {
   position: relative !important;
 }
@@ -122,24 +118,36 @@ td {
   background: transparent !important;
 }
 
-.movable {
-  background: red;
-}
-
 /**********************
 Informations cards
 **********************/
-.info-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #46560d;
-  border-radius: 5px;
-  margin: 10%;
-  padding: 10%;
+aside {
   color: #46560d;
   background-color: #c0a26c;
+  width: 100%;
+  margin: 1rem;
+  border-radius: 10px;
+}
+
+.content__item-players {
+  margin-right: 2rem;
+}
+
+.info-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  margin: 0%;
+  padding: 0%;
+}
+
+.info-wrapper__content-right {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 1rem;
 }
 
 .info-wrapper__title {
@@ -163,7 +171,11 @@ Informations cards
 
 .info-wrapper__item-description__img {
   background-size: contain !important;
-  margin-bottom: 1rem;
+  /*! margin-bottom: 1rem; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
 }
 
 .info-wrapper__item-description__body {
@@ -184,6 +196,6 @@ Informations cards
 
 .content__item-weapons {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 }

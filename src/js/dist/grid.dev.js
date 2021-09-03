@@ -60,21 +60,20 @@ function () {
     key: "displayPlayersInfo",
     value: function displayPlayersInfo() {
       var c = document.querySelector('.content__item-players');
+      c.innerHTML = "";
 
       for (var j = 0; j < this.players.length; j++) {
         var imagePlayer = j == 0 ? "link.png" : "Ganondorf.png";
         var aside = document.createElement('aside');
-        aside.innerHTML = "<div class=\"info-wrapper\">\n            <div class=\"info-wrapper__title\">".concat(this.players[j].name, "</div>\n            <div class=\"info-wrapper__item-description\">\n            <div class=\"info-wrapper__item-description__img\">\n            <img src=\"/src/img/").concat(imagePlayer, "\">\n            </div>\n            <div class=\"info-wrapper__item-description__body\">\n            <div id=\"player__weapon\">\n            Arme : ").concat(this.players[j].weapon.name, "\n            </div>\n            <div id=\"player__life\">\n            Vie : ").concat(this.players[j].life, "\n            </div>\n            </div>\n            </div>\n            </div>");
+        aside.innerHTML = "<div class=\"info-wrapper\">\n                <div class=\"info-wrapper__content-left\">\n                    <div class=\"info-wrapper__item-description__img\">\n                        <img src=\"/src/img/".concat(imagePlayer, "\">\n                    </div>\n                </div>\n                <div class=\"info-wrapper__content-right\">\n                    <div class=\"info-wrapper__header\">").concat(this.players[j].name, "</div>\n                    <div class=\"info-wrapper__body\">\n                        <div id=\"player__weapon\">\n                            Arme : ").concat(this.players[j].weapon.name, "\n                            </div>\n                        <div id=\"player__life\">\n                            Vie : ").concat(this.players[j].life, "\n                        </div>\n                    </div>\n                </div>\n            </div>");
         c.appendChild(aside);
       }
-
-      ;
     }
   }, {
     key: "movePlayer",
     value: function movePlayer(td) {
-      console.log("movePlayer", td); //1. récupérer (x,y) de la case td
-
+      //console.log("movePlayer", td);
+      //1. récupérer (x,y) de la case td
       var x = parseInt(td.dataset.x);
       var y = parseInt(td.dataset.y);
       this.takeWeapon(x, y); //2. attribuer les nouvelles coordonnées au player actif
@@ -95,6 +94,8 @@ function () {
       this.drawObstacles();
       this.drawPlayers();
       this.drawWeapons();
+      this.displayPlayersInfo();
+      this.displayWeaponsInfo();
     } // isEmptyCell(x, y) {
     //     for (let i = 0; i < this.obstacles.length; i++) {
     //         if (this.obstacles[i].x == x && this.obstacles[i].y == y) {
@@ -231,11 +232,16 @@ function () {
         }
       }
 
-      this.weapons[0].name = 'Épée de légende';
-      this.weapons[1].name = 'Lance de soldat';
+      this.weapons[0].name = 'epee-des-flammes';
+      this.weapons[0].img = 'epee-des-flammes.jpg';
+      this.weapons[1].name = 'epee-de-legende';
+      this.weapons[1].img = 'epee-de-legende.jpg';
       this.weapons[2].name = 'Hache de maître';
-      this.weapons[3].name = 'Grand bommerang';
-      this.weapons[4].name = 'Arc royal'; //console.log(this.weapons);
+      this.weapons[2].img = 'hache-de-maitre.jpg';
+      this.weapons[3].name = 'longue-epee-electrique';
+      this.weapons[3].img = 'longue-epee-electrique.jpg';
+      this.weapons[4].name = 'Arc royal';
+      this.weapons[4].img = 'arc-royal.jpg'; //console.log(this.weapons);
     }
   }, {
     key: "takeWeapon",
@@ -247,8 +253,12 @@ function () {
         var newWeapons = this.weapons.filter(function (weapon) {
           return weapon.name != wCell.name;
         });
+        wPlayer.x = x;
+        wPlayer.y = y;
         newWeapons.push(wPlayer);
         this.players[this.activePlayerIndex].weapon = wCell;
+        console.log(newWeapons, this.weapons);
+        this.weapons = newWeapons;
       }
     }
   }, {
@@ -256,38 +266,18 @@ function () {
     value: function drawWeapons() {
       for (var i = 0; i < this.weapons.length; i++) {
         var cell = document.querySelector('td[data-x="' + this.weapons[i].x + '"][data-y="' + this.weapons[i].y + '"]');
-        cell.classList.add("weapon" + i);
-        console.log(cell);
+        cell.classList.add("weapon" + i); // console.log(cell);
       }
     }
   }, {
     key: "displayWeaponsInfo",
     value: function displayWeaponsInfo() {
       var c = document.querySelector('.content__item-weapons');
+      c.innerHTML = "";
 
       for (var j = 0; j < this.weapons.length; j++) {
-        var imageWeapons = {
-          0: 'longue-epee-electrique.png',
-          1: 'hache-de-maitre.png',
-          2: 'epee-des-flammes.png',
-          3: 'epee-de-legende.png',
-          4: 'arc-royal.png'
-        };
-        /*if (j == 0) {
-            imageWeapons = "longue-epee-electrique.png";
-          } else if (j == 1) {
-            imageWeapons = "hache-de-maitre.png";
-          } else if (j == 2) {
-            imageWeapons = "epee-des-flammes.png";
-          } else if (j == 3) {
-            imageWeapons = "epee-de-legende.png";
-          } else {
-            imageWeapons = "arc-royal.png";
-          }*/
-
-        console.log(imageWeapons);
         var aside = document.createElement('aside');
-        aside.innerHTML = "<div class=\"info-wrapper\">\n            <div class=\"info-wrapper__title\">".concat(this.weapons[j].name, "</div>\n            <div class=\"info-wrapper__item-description\">\n            <div class=\"info-wrapper__item-description__img\">\n            <img src=\"/src/img/").concat(imageWeapons[j], "\">\n            </div>\n            <div class=\"info-wrapper__item-description__body\">\n            <div id=\"player__life\">\n            Dommages : ").concat(this.weapons[j].damages, "\n            </div>\n            </div>\n            </div>\n            </div>");
+        aside.innerHTML = "<div class=\"info-wrapper\">\n                <div class=\"info-wrapper__content-left\">\n                    <div class=\"info-wrapper__item-description__img\">\n                        <img src=\"/src/img/".concat(this.weapons[j].img, "\">\n                    </div>\n                </div>\n                <div class=\"info-wrapper__content-right\">\n                    <div class=\"info-wrapper__header\">").concat(this.weapons[j].name, "</div>\n                    <div class=\"info-wrapper__body\">\n                        <div id=\"weapon__dammages\">\n                            Dommages : ").concat(this.weapons[j].damages, "\n                        </div>\n                    </div>\n                </div>\n            </div>");
         c.appendChild(aside);
       }
 
@@ -313,8 +303,7 @@ function () {
       }
 
       this.players[0].name = 'Link';
-      this.players[1].name = 'Ganondorf';
-      console.log(this.players);
+      this.players[1].name = 'Ganondorf'; // console.log(this.players);
     }
   }, {
     key: "drawPlayers",
@@ -379,9 +368,9 @@ function () {
           x: x,
           y: _i3
         });else break;
-      }
+      } // console.log(cells);
 
-      console.log(cells);
+
       return cells;
     }
   }, {

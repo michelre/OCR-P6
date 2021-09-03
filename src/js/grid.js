@@ -38,34 +38,38 @@ class Grid {
     
     
     displayPlayersInfo() {
-        let c = document.querySelector('.content__item-players');       
+        let c = document.querySelector('.content__item-players'); 
+        c.innerHTML = "";      
         
         for (let j = 0; j < this.players.length; j++) {
             const imagePlayer = (j == 0) ? "link.png" : "Ganondorf.png";
             const aside = document.createElement('aside');
-            aside.innerHTML = `<div class="info-wrapper">
-            <div class="info-wrapper__title">${this.players[j].name}</div>
-            <div class="info-wrapper__item-description">
-            <div class="info-wrapper__item-description__img">
-            <img src="/src/img/${imagePlayer}">
-            </div>
-            <div class="info-wrapper__item-description__body">
-            <div id="player__weapon">
-            Arme : ${this.players[j].weapon.name}
-            </div>
-            <div id="player__life">
-            Vie : ${this.players[j].life}
-            </div>
-            </div>
-            </div>
+            aside.innerHTML =
+             `<div class="info-wrapper">
+                <div class="info-wrapper__content-left">
+                    <div class="info-wrapper__item-description__img">
+                        <img src="/src/img/${imagePlayer}">
+                    </div>
+                </div>
+                <div class="info-wrapper__content-right">
+                    <div class="info-wrapper__header">${this.players[j].name}</div>
+                    <div class="info-wrapper__body">
+                        <div id="player__weapon">
+                            Arme : ${this.players[j].weapon.name}
+                            </div>
+                        <div id="player__life">
+                            Vie : ${this.players[j].life}
+                        </div>
+                    </div>
+                </div>
             </div>`;
             c.appendChild(aside);
-        };
+        }
     }
     
     
     movePlayer(td) {
-        console.log("movePlayer", td);
+        //console.log("movePlayer", td);
         //1. récupérer (x,y) de la case td
         const x = parseInt(td.dataset.x);
         const y = parseInt(td.dataset.y);
@@ -87,6 +91,8 @@ class Grid {
         this.drawObstacles();
         this.drawPlayers();
         this.drawWeapons();
+        this.displayPlayersInfo();
+        this.displayWeaponsInfo();
     }
     
     // isEmptyCell(x, y) {
@@ -202,11 +208,16 @@ class Grid {
             }
         }
         
-        this.weapons[0].name = 'Épée de légende';
-        this.weapons[1].name = 'Lance de soldat';
+        this.weapons[0].name = 'epee-des-flammes';
+        this.weapons[0].img = 'epee-des-flammes.jpg';
+        this.weapons[1].name = 'epee-de-legende';
+        this.weapons[1].img = 'epee-de-legende.jpg';
         this.weapons[2].name = 'Hache de maître';
-        this.weapons[3].name = 'Grand bommerang';
+        this.weapons[2].img = 'hache-de-maitre.jpg';
+        this.weapons[3].name = 'longue-epee-electrique';
+        this.weapons[3].img = 'longue-epee-electrique.jpg';
         this.weapons[4].name = 'Arc royal';
+        this.weapons[4].img = 'arc-royal.jpg';
         
         //console.log(this.weapons);
     }
@@ -218,9 +229,13 @@ class Grid {
         if (wCell) {
             let newWeapons = this.weapons.filter((weapon) => {
                 return weapon.name != wCell.name;
-            });            
+            }); 
+            wPlayer.x = x;           
+            wPlayer.y = y;           
             newWeapons.push(wPlayer);
             this.players[this.activePlayerIndex].weapon = wCell;
+            console.log(newWeapons, this.weapons);
+            this.weapons = newWeapons;
         }
     }
     
@@ -228,50 +243,31 @@ class Grid {
         for(let i = 0; i < this.weapons.length; i++) {
             const cell = document.querySelector('td[data-x="' + this.weapons[i].x + '"][data-y="' + this.weapons[i].y + '"]');
             cell.classList.add("weapon" + i);
-            console.log(cell);
+            // console.log(cell);
         }
     }
     
     displayWeaponsInfo() {
         let c = document.querySelector('.content__item-weapons');
-        
+        c.innerHTML = "";
         
         for (let j = 0; j < this.weapons.length; j++) {
-            let imageWeapons = {
-                0: 'longue-epee-electrique.png',
-                1: 'hache-de-maitre.png',
-                2: 'epee-des-flammes.png',
-                3: 'epee-de-legende.png',
-                4: 'arc-royal.png'
-            };
-            
-            /*if (j == 0) {
-                imageWeapons = "longue-epee-electrique.png";
-              } else if (j == 1) {
-                imageWeapons = "hache-de-maitre.png";
-              } else if (j == 2) {
-                imageWeapons = "epee-des-flammes.png";
-              } else if (j == 3) {
-                imageWeapons = "epee-de-legende.png";
-              } else {
-                imageWeapons = "arc-royal.png";
-              }*/
-            console.log(imageWeapons);
-
-
             const aside = document.createElement('aside');
-            aside.innerHTML = `<div class="info-wrapper">
-            <div class="info-wrapper__title">${this.weapons[j].name}</div>
-            <div class="info-wrapper__item-description">
-            <div class="info-wrapper__item-description__img">
-            <img src="/src/img/${imageWeapons[j]}">
-            </div>
-            <div class="info-wrapper__item-description__body">
-            <div id="player__life">
-            Dommages : ${this.weapons[j].damages}
-            </div>
-            </div>
-            </div>
+            aside.innerHTML = 
+            `<div class="info-wrapper">
+                <div class="info-wrapper__content-left">
+                    <div class="info-wrapper__item-description__img">
+                        <img src="/src/img/${this.weapons[j].img}">
+                    </div>
+                </div>
+                <div class="info-wrapper__content-right">
+                    <div class="info-wrapper__header">${this.weapons[j].name}</div>
+                    <div class="info-wrapper__body">
+                        <div id="weapon__dammages">
+                            Dommages : ${this.weapons[j].damages}
+                        </div>
+                    </div>
+                </div>
             </div>`;
             c.appendChild(aside);
         };
@@ -294,7 +290,7 @@ class Grid {
         }
         this.players[0].name = 'Link';
         this.players[1].name = 'Ganondorf';
-        console.log(this.players);
+        // console.log(this.players);
     }
     
     drawPlayers() {
@@ -357,7 +353,7 @@ class Grid {
             else
             break;
         }
-        console.log(cells);
+        // console.log(cells);
         return cells;
         
     }

@@ -4,6 +4,7 @@ class Weapon {
         this.y = y;
         this.damages = damages;
         this.name = "";
+        this.img = "";
     }
 }
 

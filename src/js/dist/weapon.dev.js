@@ -9,4 +9,5 @@ var Weapon = function Weapon(x, y, damages) {
   this.y = y;
   this.damages = damages;
   this.name = "";
+  this.img = "";
 }; // console.log('weapons-hello');
