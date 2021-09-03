@@ -4,7 +4,7 @@ class Player {
         this.y = y;
         this.life = 100;
         this.weapon = new Weapon(-1, -1, 0);
-        this.weapon.name = "lance";
+        this.weapon.name = "Espadon rouillée";
         this.name = "";
     }    
 }

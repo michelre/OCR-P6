@@ -232,16 +232,16 @@ function () {
         }
       }
 
-      this.weapons[0].name = 'epee-des-flammes';
-      this.weapons[0].img = 'epee-des-flammes.jpg';
-      this.weapons[1].name = 'epee-de-legende';
-      this.weapons[1].img = 'epee-de-legende.jpg';
-      this.weapons[2].name = 'Hache de maître';
-      this.weapons[2].img = 'hache-de-maitre.jpg';
-      this.weapons[3].name = 'longue-epee-electrique';
-      this.weapons[3].img = 'longue-epee-electrique.jpg';
-      this.weapons[4].name = 'Arc royal';
-      this.weapons[4].img = 'arc-royal.jpg'; //console.log(this.weapons);
+      this.weapons[0].name = 'Hache de maître';
+      this.weapons[0].img = 'Hache_du_Maitre_ocrp6_jmg.png';
+      this.weapons[1].name = 'Epée Royale';
+      this.weapons[1].img = 'epee_royal_ocrp6_jmg.png';
+      this.weapons[2].name = 'Epée des Flammes';
+      this.weapons[2].img = 'epee_des_flammes_ocrp6_jmg.png';
+      this.weapons[3].name = 'Hallebarde de Garde Royal';
+      this.weapons[3].img = 'Hallebarde_de_Garde_Royal_ocrp6_jmg.png';
+      this.weapons[4].name = 'Epée de Légende';
+      this.weapons[4].img = 'epee_de_legende_ocrp6_jmg.png'; //console.log(this.weapons);
     }
   }, {
     key: "takeWeapon",
@@ -264,9 +264,12 @@ function () {
   }, {
     key: "drawWeapons",
     value: function drawWeapons() {
+      var b = document.querySelector('.weapon');
+      b.innerHTML = "";
+
       for (var i = 0; i < this.weapons.length; i++) {
-        var cell = document.querySelector('td[data-x="' + this.weapons[i].x + '"][data-y="' + this.weapons[i].y + '"]');
-        cell.classList.add("weapon" + i); // console.log(cell);
+        var cell = document.querySelector('td[data-x="' + this.weapons[i].x + '"][data-y="' + this.weapons[i].y + '"]'); // cell.classList.add("weapon" + i);
+        // console.log(cell);
       }
     }
   }, {

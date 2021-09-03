@@ -70,31 +70,6 @@ td {
   height: 71px;
 }
 
-.weapon0 {
-  background: url("../img/arc-royal.jpg") no-repeat center;
-  background-size: contain;
-}
-
-.weapon1 {
-  background: url("../img/epee-de-legende.jpg") no-repeat center;
-  background-size: contain;
-}
-
-.weapon2 {
-  background: url("../img/epee-des-flammes.jpg") no-repeat center;
-  background-size: contain;
-}
-
-.weapon3 {
-  background: url("../img/hache-de-maitre.jpg") no-repeat center;
-  background-size: contain;
-}
-
-.weapon4 {
-  background: url("../img/longue-epee-electrique.jpg") no-repeat center;
-  background-size: contain;
-}
-
 td[class^=weapon] {
   z-index: 999;
 }
