@@ -45,23 +45,23 @@ class Grid {
             const imagePlayer = (j == 0) ? "link.png" : "Ganondorf.png";
             const aside = document.createElement('aside');
             aside.innerHTML =
-             `<div class="info-wrapper">
-                <div class="info-wrapper__content-left">
-                    <div class="info-wrapper__item-description__img">
-                        <img src="/src/img/${imagePlayer}">
-                    </div>
-                </div>
-                <div class="info-wrapper__content-right">
-                    <div class="info-wrapper__header">${this.players[j].name}</div>
-                    <div class="info-wrapper__body">
-                        <div id="player__weapon">
-                            Arme : ${this.players[j].weapon.name}
-                            </div>
-                        <div id="player__life">
-                            Vie : ${this.players[j].life}
-                        </div>
-                    </div>
-                </div>
+            `<div class="info-wrapper">
+            <div class="info-wrapper__content-left">
+            <div class="info-wrapper__item-description__img">
+            <img src="/src/img/${imagePlayer}">
+            </div>
+            </div>
+            <div class="info-wrapper__content-right">
+            <div class="info-wrapper__header">${this.players[j].name}</div>
+            <div class="info-wrapper__body">
+            <div id="player__weapon">
+            Arme : ${this.players[j].weapon.name}
+            </div>
+            <div id="player__life">
+            Vie : ${this.players[j].life}
+            </div>
+            </div>
+            </div>
             </div>`;
             c.appendChild(aside);
         }
@@ -210,18 +210,63 @@ class Grid {
         
         this.weapons[0].name = 'Hache de maître';
         this.weapons[0].img = 'Hache_du_Maitre_ocrp6_jmg.png';
+        this.weapons[0].damages = 10;
         this.weapons[1].name = 'Epée Royale';
         this.weapons[1].img = 'epee_royal_ocrp6_jmg.png';
+        this.weapons[1].damages = 20;
         this.weapons[2].name = 'Epée des Flammes';
         this.weapons[2].img = 'epee_des_flammes_ocrp6_jmg.png';
+        this.weapons[2].damages = 30;
         this.weapons[3].name = 'Hallebarde de Garde Royal';
         this.weapons[3].img = 'Hallebarde_de_Garde_Royal_ocrp6_jmg.png';
+        this.weapons[3].damages = 40;
         this.weapons[4].name = 'Epée de Légende';
         this.weapons[4].img = 'epee_de_legende_ocrp6_jmg.png';
+        this.weapons[4].damages = 50;
         
         //console.log(this.weapons);
     }
     
+    drawWeapons() {
+        let b = document.querySelector('.weapon');
+        
+        for(let i = 0; i < this.weapons.length; i++) {
+            
+            const cell = document.querySelector('td[data-x="' + this.weapons[i].x + '"][data-y="' + this.weapons[i].y + '"]');
+            cell.innerHTML = `<img class="weapon-img" src="/src/img/${this.weapons[i].img}">`;
+            
+            
+            // console.log(cell);
+            // cell.classList.add("weapon" + i);
+        }
+    }
+    
+    displayWeaponsInfo() {
+        let c = document.querySelector('.content__item-weapons');
+        c.innerHTML = "";
+        
+        for (let j = 0; j < this.weapons.length; j++) {
+            const aside = document.createElement('aside');
+            aside.innerHTML = 
+            `<div class="info-wrapper">
+            <div class="info-wrapper__content-left">
+            <div class="info-wrapper__item-description__img">
+            <img src="/src/img/${this.weapons[j].img}">
+            </div>
+            </div>
+            <div class="info-wrapper__content-right">
+            <div class="info-wrapper__header">${this.weapons[j].name}</div>
+            <div class="info-wrapper__body">
+            <div id="weapon__dammages">
+            Dommages : ${this.weapons[j].damages}
+            </div>
+            </div>
+            </div>
+            </div>`;
+            c.appendChild(aside);
+        };
+    }
+
     takeWeapon(x, y) {
         let wCell = this.isCellWeapon(x,y);
         let wPlayer = this.players[this.activePlayerIndex].weapon;
@@ -237,46 +282,6 @@ class Grid {
             console.log(newWeapons, this.weapons);
             this.weapons = newWeapons;
         }
-    }
-    
-    drawWeapons() {
-        let b = document.querySelector('.weapon');
-        b.innerHTML = "";
-
-        for(let i = 0; i < this.weapons.length; i++) {
-            
-            const cell = document.querySelector('td[data-x="' + this.weapons[i].x + '"][data-y="' + this.weapons[i].y + '"]');
-            
-            // cell.classList.add("weapon" + i);
-            
-            // console.log(cell);
-        }
-    }
-    
-    displayWeaponsInfo() {
-        let c = document.querySelector('.content__item-weapons');
-        c.innerHTML = "";
-        
-        for (let j = 0; j < this.weapons.length; j++) {
-            const aside = document.createElement('aside');
-            aside.innerHTML = 
-            `<div class="info-wrapper">
-                <div class="info-wrapper__content-left">
-                    <div class="info-wrapper__item-description__img">
-                        <img src="/src/img/${this.weapons[j].img}">
-                    </div>
-                </div>
-                <div class="info-wrapper__content-right">
-                    <div class="info-wrapper__header">${this.weapons[j].name}</div>
-                    <div class="info-wrapper__body">
-                        <div id="weapon__dammages">
-                            Dommages : ${this.weapons[j].damages}
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-            c.appendChild(aside);
-        };
     }
     
     /*************************

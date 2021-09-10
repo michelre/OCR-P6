@@ -59,10 +59,18 @@ td {
     height: 70px;
     width: 70px;
     border: 2px solid #3fb13e;
+    text-align: center;
 }
 
 .movable {
     background: #ec0a0a69;
+    position: relative;
+    z-index: 10;
+}
+
+.weapon-img {
+    position: relative;
+    z-index: 1;
 }
 
 .obstacle {
@@ -74,14 +82,9 @@ td {
     height: 71px;
 }
 
-// .weapon0 {
-//     background: url('../img/arc-royal.jpg')  no-repeat center;
-//     background-size: contain;
-// }
-
-td[class^="weapon"] {
-    z-index: 999;
-  }
+// td[class^="weapon-image"] {
+//     z-index: 999;
+//   }
 
 .Link {
     background-size: contain!important;
@@ -120,8 +123,8 @@ aside {
 
 .info-wrapper { 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     border-radius: 3px;
     margin: 0%;
     padding: 0%;

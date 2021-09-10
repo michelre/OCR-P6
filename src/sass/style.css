@@ -76,10 +76,18 @@ td {
   height: 70px;
   width: 70px;
   border: 2px solid #3fb13e;
+  text-align: center;
 }
 
 .movable {
   background: #ec0a0a69;
+  position: relative;
+  z-index: 10;
+}
+
+.weapon-img {
+  position: relative;
+  z-index: 1;
 }
 
 .obstacle {
@@ -89,35 +97,6 @@ td {
 .players {
   width: 71px;
   height: 71px;
-}
-
-.weapon0 {
-  background: url("../img/arc-royal.jpg") no-repeat center;
-  background-size: contain;
-}
-
-.weapon1 {
-  background: url("../img/epee-de-legende.jpg") no-repeat center;
-  background-size: contain;
-}
-
-.weapon2 {
-  background: url("../img/epee-des-flammes.jpg") no-repeat center;
-  background-size: contain;
-}
-
-.weapon3 {
-  background: url("../img/hache-de-maitre.jpg") no-repeat center;
-  background-size: contain;
-}
-
-.weapon4 {
-  background: url("../img/longue-epee-electrique.jpg") no-repeat center;
-  background-size: contain;
-}
-
-td[class^="weapon"] {
-  z-index: 999;
 }
 
 .Link {
@@ -158,12 +137,12 @@ aside {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   border-radius: 3px;
   margin: 0%;
   padding: 0%;
