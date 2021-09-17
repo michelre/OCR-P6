@@ -352,15 +352,9 @@ function () {
     value: function createFightBtn() {
       for (var i = 0; i < this.players.length; i++) {
         if (this.players[i].x === this.isPlayerCollapsed.x || this.players[i].y === this.isPlayerCollapsed.y) {
-          return warBtn;
+          return document.getElementsByClassName("content").innerHTML = "<div class=\"warBtn\">coucou</div>";
         }
       }
-    }
-  }, {
-    key: "drawWarBtn",
-    value: function drawWarBtn(warBtn) {
-      var btn = document.getElementsByClassName("content").innerHTML = "<div class=\"warBtn\">coucou</div>";
-      btn.classList.add("movable");
     }
     /*************************
     * Cells

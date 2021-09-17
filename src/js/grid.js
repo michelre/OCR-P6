@@ -339,16 +339,10 @@ class Grid {
     createFightBtn() {
         for(let i = 0; i < this.players.length; i++) {
            if ((this.players[i].x === this.isPlayerCollapsed.x) || (this.players[i].y === this.isPlayerCollapsed.y)) {
-               return warBtn;
+               return document.getElementsByClassName("content").innerHTML = `<div class="warBtn">coucou</div>`;
            }
         }
     }
-
-    drawWarBtn(warBtn) {
-    
-            const btn = document.getElementsByClassName("content").innerHTML = `<div class="warBtn">coucou</div>`;
-            btn.classList.add("movable");
-        }
 
     /*************************
     * Cells
