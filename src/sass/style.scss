@@ -26,16 +26,11 @@
 
 .content {
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
     min-height: 100%;
     min-width: 100%;
 }
-
 
 .game-details {
     display: flex;
@@ -83,8 +78,8 @@ td {
 }
 
 // td[class^="weapon-image"] {
-//     z-index: 999;
-//   }
+    //     z-index: 999;
+    //   }
 
 .Link {
     background-size: contain!important;
@@ -112,22 +107,29 @@ Informations cards
 aside {
     color: #46560d;
     background-color: #c0a26c;
-    width: 100%;
+    width: 80%;
     margin: 1rem;
     border-radius: 10px;
 }
 
 .content__item-players {
-    margin-right: 2rem;
+    width: 20%;
+    font-size: .8rem;
+}
+
+.content__item-weapons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .info-wrapper { 
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
-    border-radius: 3px;
-    margin: 0%;
-    padding: 0%;
+    align-items: center;
+    border-radius: 2px;
+    margin: 0;
+    padding: 0;
 }
 
 .info-wrapper__content-right {
@@ -183,8 +185,10 @@ aside {
     margin-bottom: 1rem;
 }
 
-.content__item-weapons {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+.warBtn {
+    position: absolute;
+    width: 10rem;
+    height: 10rem;
+    background-color: #ca0109;
+    color: #3fb13e;
 }

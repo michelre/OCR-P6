@@ -11,8 +11,10 @@ grid.drawPlayers();
 grid.drawWeapons();
 grid.takeWeapon();
 grid.displayWeaponsInfo();
+grid.isPlayerCollapsed();
 var cells = grid.getMovableCells();
-grid.drawMovableCells(cells); // Swal.fire({
+grid.drawMovableCells(cells);
+grid.createFightBtn(); // Swal.fire({
 //     title: '<strong>Bienvenue</strong>',
 //     icon: '',
 //     html: `

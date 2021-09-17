@@ -45,12 +45,18 @@ function () {
 
       table += "</table>";
       gameGrid.innerHTML = table;
-      document.querySelectorAll("td").forEach(function (td) {
+      document.querySelectorAll("td, .weapon-img").forEach(function (td) {
         // function(td)
         td.addEventListener('click', function (e) {
-          // function (e)
+          console.log(e.target.parentNode); // function (e)
+
           if (e.target.classList.contains("movable")) {
             _this.movePlayer(e.target); // pour récupérer les nouvellles coordonnées du player
+
+          }
+
+          if (e.target.parentNode.classList.contains("movable")) {
+            _this.movePlayer(e.target.parentNode); // pour récupérer les nouvellles coordonnées du player
 
           }
         });
@@ -96,6 +102,7 @@ function () {
       this.drawWeapons();
       this.displayPlayersInfo();
       this.displayWeaponsInfo();
+      this.createFightBtn();
     } // isEmptyCell(x, y) {
     //     for (let i = 0; i < this.obstacles.length; i++) {
     //         if (this.obstacles[i].x == x && this.obstacles[i].y == y) {
@@ -286,8 +293,8 @@ function () {
         wPlayer.x = x;
         wPlayer.y = y;
         newWeapons.push(wPlayer);
-        this.players[this.activePlayerIndex].weapon = wCell;
-        console.log(newWeapons, this.weapons);
+        this.players[this.activePlayerIndex].weapon = wCell; // console.log(newWeapons, this.weapons);
+
         this.weapons = newWeapons;
       }
     }
@@ -335,6 +342,25 @@ function () {
     key: "isActivePlayer",
     value: function isActivePlayer() {
       if (this.activePlayerIndex == 0) this.players = 'player1';else this.players = 'player2';
+    }
+    /*************************
+    * Fight
+    *************************/
+
+  }, {
+    key: "createFightBtn",
+    value: function createFightBtn() {
+      for (var i = 0; i < this.players.length; i++) {
+        if (this.players[i].x === this.isPlayerCollapsed.x || this.players[i].y === this.isPlayerCollapsed.y) {
+          return warBtn;
+        }
+      }
+    }
+  }, {
+    key: "drawWarBtn",
+    value: function drawWarBtn(warBtn) {
+      var btn = document.getElementsByClassName("content").innerHTML = "<div class=\"warBtn\">coucou</div>";
+      btn.classList.add("movable");
     }
     /*************************
     * Cells

@@ -9,8 +9,11 @@ grid.drawPlayers();
 grid.drawWeapons();
 grid.takeWeapon();
 grid.displayWeaponsInfo();
+grid.isPlayerCollapsed();
 const cells = grid.getMovableCells();
 grid.drawMovableCells(cells);
+grid.createFightBtn();
+
 
 
 

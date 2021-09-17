@@ -27,10 +27,14 @@ class Grid {
         }
         table += "</table>";
         gameGrid.innerHTML = table;
-        document.querySelectorAll("td").forEach((td) => { // function(td)
-            td.addEventListener('click', (e) => { // function (e)
+        document.querySelectorAll("td, .weapon-img").forEach((td) => { // function(td)
+            td.addEventListener('click', (e) => {
+                console.log(e.target.parentNode);// function (e)
                 if (e.target.classList.contains("movable")) {
                     this.movePlayer(e.target); // pour récupérer les nouvellles coordonnées du player
+                }
+                if (e.target.parentNode.classList.contains("movable")) {
+                    this.movePlayer(e.target.parentNode); // pour récupérer les nouvellles coordonnées du player
                 }
             });
         });
@@ -83,7 +87,6 @@ class Grid {
         this.changeActivePlayerIndex();
         const cells = this.getMovableCells();
         this.drawMovableCells(cells);
-        
     }
     
     renderGrid() {
@@ -93,6 +96,7 @@ class Grid {
         this.drawWeapons();
         this.displayPlayersInfo();
         this.displayWeaponsInfo();
+        this.createFightBtn();
     }
     
     // isEmptyCell(x, y) {
@@ -165,7 +169,10 @@ class Grid {
             }
         }
         return false;
+        
     }
+ 
+
     
     /*************************
     * Obstacles
@@ -234,8 +241,6 @@ class Grid {
             
             const cell = document.querySelector('td[data-x="' + this.weapons[i].x + '"][data-y="' + this.weapons[i].y + '"]');
             cell.innerHTML = `<img class="weapon-img" src="/src/img/${this.weapons[i].img}">`;
-            
-            
             // console.log(cell);
             // cell.classList.add("weapon" + i);
         }
@@ -279,7 +284,7 @@ class Grid {
             wPlayer.y = y;           
             newWeapons.push(wPlayer);
             this.players[this.activePlayerIndex].weapon = wCell;
-            console.log(newWeapons, this.weapons);
+            // console.log(newWeapons, this.weapons);
             this.weapons = newWeapons;
         }
     }
@@ -327,8 +332,24 @@ class Grid {
         else
         this.players = 'player2';
     }
+
+    /*************************
+    * Fight
+    *************************/
+    createFightBtn() {
+        for(let i = 0; i < this.players.length; i++) {
+           if ((this.players[i].x === this.isPlayerCollapsed.x) || (this.players[i].y === this.isPlayerCollapsed.y)) {
+               return warBtn;
+           }
+        }
+    }
+
+    drawWarBtn(warBtn) {
     
-    
+            const btn = document.getElementsByClassName("content").innerHTML = `<div class="warBtn">coucou</div>`;
+            btn.classList.add("movable");
+        }
+
     /*************************
     * Cells
     *************************/
