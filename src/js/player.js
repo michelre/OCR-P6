@@ -7,7 +7,8 @@ class Player {
         this.weapon.name = "Espadon rouillée";
         this.weapon.img = "espadon_rouillee_ocrp6_jmg.png";
         this.name = "";
-    }    
+        this.defend = false;
+    }
 }
 
 // console.log('players-hello');

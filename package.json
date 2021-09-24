@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass:dev": "sass ./src/sass/style.scss ./src/sass/style.css -w",
+    "sass:build": "sass ./src/sass/style.scss ./src/sass/style.css"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,8 @@
   "dependencies": {
     "jshint": "^2.12.0",
     "sweetalert2": "^10.15.5"
+  },
+  "devDependencies": {
+    "sass": "^1.42.1"
   }
 }
