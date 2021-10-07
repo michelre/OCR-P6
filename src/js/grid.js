@@ -315,7 +315,7 @@ class Grid {
         for (let i = 0; i < this.weapons.length; i++) {
 
             const cell = document.querySelector('td[data-x="' + this.weapons[i].x + '"][data-y="' + this.weapons[i].y + '"]');
-            cell.innerHTML = `<img class="weapon-img" src="src/img/${this.weapons[i].img}">`;
+            cell.innerHTML = `<img class="weapon-img" src="img/${this.weapons[i].img}">`;
             // console.log(cell);
             // cell.classList.add("weapon" + i);
         }
