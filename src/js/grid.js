@@ -60,17 +60,29 @@ class Grid {
                         <div id="player__weapon">
                             Arme : ${this.players[j].weapon.name}
                         </div>
-                        <div id="player__life">
+                        <div id="player__life" class="player__life">
                             Vie : ${this.players[j].life}
                         </div>
                     </div>
                 </div>
                 <div class="player-buttons">
-                    <button>Attaquer</button>
-                    <button>Défendre</button>
+                    <button class="attack">Attaquer</button>
+                    <button class="defend">Défendre</button>
                 </div>
             </div>`;
             c.appendChild(aside);
+            const attackBtns = aside.querySelectorAll('.attack')
+            const defendBtns = aside.querySelectorAll('.defend')
+            attackBtns.forEach((btn, idx) => {
+                btn.addEventListener('click', () => {
+                    this.playerAttack()
+                })
+            })
+            defendBtns.forEach((btn, idx) => {
+                btn.addEventListener('click', () => {
+                    this.playerDefend()
+                })
+            })
         }
     }
 
@@ -101,23 +113,54 @@ class Grid {
         fightLayer.classList.add('fight-layer')
         const gameGrid = document.querySelector('.game-grid')
         gameGrid.appendChild(fightLayer)
+        this.activePlayerButtonAction()
 
     }
 
     playerAttack(){
         const activePlayer = this.players[this.activePlayerIndex]
         const otherPlayer = this.players[this.activePlayerIndex === 0 ? 1 : 0];
+        activePlayer.defend = false;
 
         if(otherPlayer.defend){
             otherPlayer.life -= activePlayer.weapon.damages / 2;
         } else {
             otherPlayer.life -= activePlayer.weapon.damages
         }
+        this.refreshPlayerLife()
+        if(otherPlayer.life <= 0){
+            setTimeout(() => {
+                alert('Fin de partie')
+                window.location.reload()
+            }, 100)
+        }
+        this.changeActivePlayerIndex()
+        this.activePlayerButtonAction()
     }
 
     playerDefend(){
         const activePlayer = this.players[this.activePlayerIndex]
         activePlayer.defend = true
+        this.refreshPlayerLife()
+        this.changeActivePlayerIndex()
+        this.activePlayerButtonAction()
+    }
+
+    refreshPlayerLife(){
+        const otherPlayerIndex = this.activePlayerIndex === 0 ? 1 : 0
+        const otherPlayer = this.players[otherPlayerIndex];
+        const playerAside = document.querySelectorAll('.content__item-players aside')[otherPlayerIndex]
+        const life = otherPlayer.life < 0 ? 0 : otherPlayer.life
+        playerAside.querySelector('.player__life').textContent = 'Vie : ' + life
+    }
+
+    activePlayerButtonAction(){
+        const otherPlayerIndex = this.activePlayerIndex === 0 ? 1 : 0
+        const otherPlayerAside = document.querySelectorAll('.content__item-players aside')[otherPlayerIndex]
+        otherPlayerAside.querySelector('.player-buttons').style.display = 'none'
+
+        const playerAside = document.querySelectorAll('.content__item-players aside')[this.activePlayerIndex]
+        playerAside.querySelector('.player-buttons').style.display = 'block'
     }
 
     renderGrid() {
