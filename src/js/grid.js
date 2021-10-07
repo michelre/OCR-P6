@@ -331,7 +331,7 @@ class Grid {
                 `<div class="info-wrapper">
             <div class="info-wrapper__content-left">
             <div class="info-wrapper__item-description__img">
-            <img src="/src/img/${this.weapons[j].img}">
+            <img src="img/${this.weapons[j].img}">
             </div>
             </div>
             <div class="info-wrapper__content-right">
