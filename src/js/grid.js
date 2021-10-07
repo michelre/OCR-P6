@@ -51,7 +51,7 @@ class Grid {
             aside.innerHTML = `<div class="info-wrapper">
                 <div class="info-wrapper__content-left">
                     <div class="info-wrapper__item-description__img">
-                        <img src="/src/img/${imagePlayer}">
+                        <img src="img/${imagePlayer}">
                     </div>
                 </div>
                 <div class="info-wrapper__content-right">
